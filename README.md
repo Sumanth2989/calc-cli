@@ -19,7 +19,7 @@ source .venv/bin/activate
 # Windows (PowerShell):
 .venv\Scripts\Activate.ps1
 
-```bash
+```
 ----
 
 ### 2) DRY Principle in Action
@@ -36,28 +36,15 @@ This separation ensures that if logic changes (e.g., adding new operations), upd
 
 ---
 
-### Usage
+### 3) Usage
 
 Run the REPL:
 python -m calculator.repl
 
 Example session:
-Welcome to calc-cli! Type 'help' for usage, 'quit' to exit.
-> help
-Usage:
-  <op> <a> <b>
-  where <op> is one of: +, -, *, /, add, sub, mul, div
-Commands:
-  help  - show this message
-  quit  - exit the calculator
-Examples:
-  + 2 3     -> 5
-  div 10 2  -> 5
+![Coverage Screenshot](example.png)
 
-> quit
-Goodbye!
-
-### For testing:
+### 4) For testing:
 Tests are written using pytest with pytest-cov for coverage reporting.
 All modules are fully tested, including edge cases like division by zero and REPL exit commands.
 
