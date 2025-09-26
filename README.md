@@ -19,7 +19,10 @@ source .venv/bin/activate
 # Windows (PowerShell):
 .venv\Scripts\Activate.ps1
 
-### DRY Principle in Action
+```bash
+----
+
+### 2) DRY Principle in Action
 This project avoids duplication through modular design:
 - **Single source of truth for operations**:  
   All arithmetic functions (`add`, `sub`, `mul`, `div`) live in `operations.py`.  
@@ -62,7 +65,7 @@ python -m pytest -p pytest_cov
 
 All tests achieve 100% coverage, as shown below:
 
-![Coverage Screenshot](/Volumes/Sumanth/STUDIES/MASTERS/web/calc-cli/Screenshot 2025-09-26 at 4.18.34 PM.png)
+![Coverage Screenshot](coverage.png)
 
 A GitHub Actions workflow (ci.yml) ensures:
 
