@@ -1,9 +1,9 @@
-from typing import Optional, Callable
+from typing import Callable, Optional
 
 from .operations import OPS
-from .parser import parse_line, HELP_TEXT
+from .parser import HELP_TEXT, parse_line
 
-BANNER = "Welcome to calc-cli! Type 'help' for usage, 'quit' to exit."
+BANNER = "Welcome to calc-cli! Press Ctrl+C or Ctrl+D to quit."
 
 def eval_once(line: str) -> str:
     """
@@ -41,21 +41,29 @@ def run_repl(
     print_fn: Optional[Callable[[str], None]] = print,
 ) -> None:
     """
-    Interactive REPL. input_fn and print_fn are injectable for testing.
+    Interactive calculator REPL (step-by-step input; exit with Ctrl+C / Ctrl+D).
     """
     print_fn(BANNER)
+
     while True:
         try:
-            line = input_fn("> ")
+            op = input_fn("Enter the operation you want to perform (+, -, *, /): ").strip()
+            if op not in OPS:
+                print_fn("Error: Unknown operation. Please choose from +, -, *, /")
+                continue
+
+            a = float(input_fn("Enter the first number: ").strip())
+            b = float(input_fn("Enter the second number: ").strip())
+
+            result = OPS[op](a, b)
+            if result.is_integer():
+                result = int(result)
+            print_fn(f"Result: {result}")
+
+        except ValueError:
+            print_fn("Error: Operands must be valid numbers.")
+        except ZeroDivisionError:
+            print_fn("Error: Cannot divide by zero.")
         except (EOFError, KeyboardInterrupt):
             print_fn("\nGoodbye!")
             break
-
-        out = eval_once(line)
-        if out:
-            print_fn(out)
-        if out == "Goodbye!":
-            break
-
-if __name__ == "__main__":  # pragma: no cover
-    run_repl()               # pragma: no cover

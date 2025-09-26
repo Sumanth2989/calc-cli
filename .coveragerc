@@ -1,0 +1,9 @@
+# .coveragerc
+[run]
+omit =
+    calculator/__main__.py
+
+[report]
+exclude_lines =
+    pragma: no cover
+    ^\s*if __name__ == ["']__main__["']:\s*$
